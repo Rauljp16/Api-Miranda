@@ -1,13 +1,15 @@
-// const express, {Request, Response, NextFunction} = require("express")
-// const router = express.Router()
-// import { Room } from "../types/global";
+import { Router, Request, Response, NextFunction } from "express";
+import { generateAccessToken } from "../services/loginServices";
 
+const router = Router()
 
-// app.post("/login", (req, res, next)=>{
-//     const {username, password} = req.body;
-//     if(username === "raul" && password === "0000"){
-//         const token = jwt.sing();
-//         return res.json({token})
-//     }
-//     return res.status(401).json({message: "invalid credentials"})
-// })
+router.post("/login", (req: Request, res: Response, _next: NextFunction) => {
+    const { username, password } = req.body;
+    if (username === "rauljp16@gmail.com" && password === "hotel miranda") {
+        const token = generateAccessToken(username);
+        return res.json({ token })
+    }
+    return res.status(401).json({ message: "invalid credentials" })
+})
+
+export default router;

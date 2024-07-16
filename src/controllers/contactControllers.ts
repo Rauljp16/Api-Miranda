@@ -6,22 +6,21 @@ const router = Router();
 
 router.get("/", (_req: Request, res: Response, _next: NextFunction) => {
     const contact = allContact();
-    res.json(contact);
+    return res.json(contact);
+});
+
+router.post("/", (_req: Request, _res: Response, _next: NextFunction) => {
+    //     const input = req.body;
+    //create contact
+    //    return res.json({contact{}});
 });
 
 
 router.get('/:id', (req: Request, res: Response, next: NextFunction) => {
     try {
         const id = req.params.id;
-        if (!id) {
-            return res.status(400).json({ message: 'ID is required' });
-        }
 
         const contact = contactById(id);
-
-        if (!contact) {
-            return res.status(404).json({ message: 'Contact not found' });
-        }
 
         return res.json(contact);
     } catch (e) {
@@ -29,5 +28,32 @@ router.get('/:id', (req: Request, res: Response, next: NextFunction) => {
         return;
     }
 });
+
+router.patch("/:id", (_req: Request, _res: Response, _next: NextFunction) => {
+    // try {
+    //     const id = req.params.id;
+    //     const contact = contactById(id);
+
+    // update contact here
+    //     return res.json(contact);
+    // } catch (e) {
+    //     next(e);
+    //     return;
+    // }
+});
+
+router.delete("/:id", (_req: Request, _res: Response, _next: NextFunction) => {
+    //     try {
+    //         const id = req.params.id;
+    //         const contact = contactById(id);
+
+    // delete contact here
+    //         return res.json({success: true});
+    //     } catch (e) {
+    //         next(e);
+    //         return;
+    //     }
+});
+
 
 export default router;
