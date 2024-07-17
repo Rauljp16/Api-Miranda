@@ -4,25 +4,25 @@ import bookingControllers from "./controllers/bookingControllers";
 import userControllers from "./controllers/userControllers";
 import contactControllers from "./controllers/contactControllers";
 import loginControllers from "./controllers/loginControllers"
+import authMiddleware from "./middleware/auth"
 
-// import authMiddlewares from "./middlewares/auth"
 
 export const app = express();
 
-//app.use(authMiddlewares)
-
-app.use("/login", loginControllers)
-app.use("/rooms", roomControllers);
-app.use("/bookings", bookingControllers);
-app.use("/users", userControllers);
-app.use("/contact", contactControllers);
 
 app.get("/", (_req: Request, res: Response) => {
     res.send({
         data: "Hola mundo"
     })
-
 })
+
+app.use("/login", loginControllers)
+app.use(authMiddleware)
+app.use("/rooms", roomControllers);
+app.use("/bookings", bookingControllers);
+app.use("/users", userControllers);
+app.use("/contact", contactControllers);
+
 
 app.use((err: Error, _req: Request, res: Response, _Next: NextFunction) => {
     console.error(err)
