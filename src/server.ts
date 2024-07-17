@@ -1,9 +1,6 @@
 import { app } from "./app"
-import { generateAccessToken } from "./services/loginServices"
 
 const port = process.env.PORT ?? 3000
 
 app.listen(port, () => console.log(`app listening on port ${port}`))
 
-const nombre = generateAccessToken("raul")
-console.log(nombre);
