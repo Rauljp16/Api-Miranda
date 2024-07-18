@@ -8,6 +8,8 @@ import authMiddleware from "./middleware/auth";
 
 export const app = express();
 
+app.use(express.json());
+
 app.get("/", (_req: Request, res: Response) => {
     const htmlResponse = `
         <style>

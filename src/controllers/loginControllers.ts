@@ -3,12 +3,10 @@ import { generateAccessToken } from "../services/loginServices";
 
 const router = Router()
 
-router.post("/", (_req: Request, res: Response, _next: NextFunction) => {
-    //const { username, password } = req.body;
-    const username = "rauljp16@gmail.com"
-    const password = "hotel miranda"
+router.post("/", (req: Request, res: Response, _next: NextFunction) => {
+    const { username, password } = req.body;
 
-    if (username === "rauljp16@gmail.com" && password === "hotel miranda") {
+    if (username === process.env.USER && password === process.env.PASSWORD) {
         const token = generateAccessToken(username);
         return res.json({ token })
     }
