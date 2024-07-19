@@ -7,9 +7,10 @@ export const allUsers = (): DataUsers[] => {
     return users;
 };
 export const userById = (id: string): DataUsers | undefined => {
+    const user = users.find(user => user.id === id);
     if (!users) {
-        throw new Error("Cannont find booking")
+        throw new Error("Cannont find users")
     }
 
-    return users.find(user => user.id === id);
+    return user
 };

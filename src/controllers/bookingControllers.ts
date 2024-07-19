@@ -5,7 +5,7 @@ const router = Router();
 
 router.get("/", (_req: Request, res: Response, _next: NextFunction) => {
     const bookings = allBookings();
-    return res.json(bookings);
+    return res.json({ bookings });
 });
 
 router.post("/", (_req: Request, _res: Response, _next: NextFunction) => {

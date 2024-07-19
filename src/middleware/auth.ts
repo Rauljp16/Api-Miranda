@@ -17,7 +17,7 @@ export default function authMiddleware(req: Request, res: Response, next: NextFu
     try {
         const TOKEN_SECRET = process.env.TOKEN_SECRET;
         if (!TOKEN_SECRET) {
-            throw new Error("TOKEN_SECRET is not defined in .env file");
+            throw new Error("Aplication error");
         }
         jwt.verify(token, TOKEN_SECRET)
         next()

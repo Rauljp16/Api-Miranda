@@ -7,12 +7,10 @@ export const allBookings = (): DataBookings[] => {
     return bookings;
 };
 export const bookingById = (id: string): DataBookings | undefined => {
+    const booking = bookings.find(booking => booking.id === id);
     if (!bookings) {
-        throw new Error("Cannont find booking")
+        throw new Error("Cannont find bookings")
     }
-    return bookings.find(booking => booking.id === id);
+    return booking
 };
 
-//
-//
-//pasar a CLASS

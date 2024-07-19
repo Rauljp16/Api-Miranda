@@ -6,7 +6,7 @@ const router = Router();
 
 router.get("/", (_req: Request, res: Response, _next: NextFunction) => {
     const contact = allContact();
-    return res.json(contact);
+    return res.json({ contact });
 });
 
 router.post("/", (_req: Request, _res: Response, _next: NextFunction) => {

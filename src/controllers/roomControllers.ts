@@ -6,7 +6,7 @@ const router = Router();
 
 router.get("/", (_req: Request, res: Response, _next: NextFunction) => {
     const rooms = allRooms();
-    return res.json(rooms);
+    return res.json({ rooms });
 });
 
 router.post("/", (_req: Request, _res: Response, _next: NextFunction) => {

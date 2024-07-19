@@ -28,14 +28,14 @@ describe("RUTA /ROOMS", () => {
     const response = await request(app)
       .get("/rooms")
       .set("Authorization", "Bearer " + TOKEN_SECRET);
-    expect(response.body).toBeInstanceOf(Array);
+    expect(response.body).toEqual(expect.objectContaining({}));
   });
 
   it("Comprueba que cada objeto tiene las propiedades indicadas", async () => {
     const response = await request(app)
       .get("/rooms")
       .set("Authorization", "Bearer " + TOKEN_SECRET);
-    response.body.forEach((rooms) => {
+    response.body.rooms.forEach((rooms) => {
       expect(rooms).toMatchObject({
         Foto: expect.any(String),
         BedType: expect.any(String),
