@@ -12,12 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.multipleBooking = exports.multipleContact = exports.multipleRooms = exports.multipleUsers = void 0;
-exports.run = run;
-exports.createRandomUser = createRandomUser;
-exports.createRandomRoom = createRandomRoom;
-exports.createRandomContact = createRandomContact;
-exports.createRandomBooking = createRandomBooking;
+exports.multipleBooking = exports.createRandomBooking = exports.multipleContact = exports.createRandomContact = exports.multipleRooms = exports.createRandomRoom = exports.multipleUsers = exports.createRandomUser = exports.run = void 0;
 const userServices_1 = require("./services/userServices");
 //import { createUsers } from "./services/userServices";
 // import { createRooms } from "./services/roomServices";
@@ -43,6 +38,7 @@ function run() {
         }
     });
 }
+exports.run = run;
 function createRandomUser() {
     return {
         foto: faker_1.faker.image.avatar(),
@@ -55,6 +51,7 @@ function createRandomUser() {
         password: faker_1.faker.internet.password(),
     };
 }
+exports.createRandomUser = createRandomUser;
 exports.multipleUsers = faker_1.faker.helpers.multiple(createRandomUser, {
     count: 10,
 });
@@ -70,6 +67,7 @@ function createRandomRoom() {
         RoomFloor: "Floor A-1",
     };
 }
+exports.createRandomRoom = createRandomRoom;
 exports.multipleRooms = faker_1.faker.helpers.multiple(createRandomRoom, {
     count: 10,
 });
@@ -83,6 +81,7 @@ function createRandomContact() {
         comment: faker_1.faker.lorem.paragraph(),
     };
 }
+exports.createRandomContact = createRandomContact;
 exports.multipleContact = faker_1.faker.helpers.multiple(createRandomContact, {
     count: 10,
 });
@@ -98,6 +97,7 @@ function createRandomBooking() {
         Status: faker_1.faker.helpers.arrayElement(['in progress', 'checkin', 'checkout']),
     };
 }
+exports.createRandomBooking = createRandomBooking;
 exports.multipleBooking = faker_1.faker.helpers.multiple(createRandomBooking, {
     count: 10,
 });

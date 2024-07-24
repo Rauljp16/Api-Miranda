@@ -12,7 +12,8 @@
   "scripts": {
     "start": "nodemon",
     "test": "jest",
-    "seed": "ts-node src/seed.ts"
+    "seed": "ts-node src/seed.ts",
+    "build": "tsc"
   },
   "devDependencies": {
     "@babel/core": "^7.24.9",

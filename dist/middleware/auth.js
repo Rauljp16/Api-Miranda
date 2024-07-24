@@ -1,6 +1,5 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.default = authMiddleware;
 const jwt = require('jsonwebtoken');
 function authMiddleware(req, res, next) {
     const authHeader = req.get("Authorization");
@@ -26,3 +25,4 @@ function authMiddleware(req, res, next) {
         return;
     }
 }
+exports.default = authMiddleware;
