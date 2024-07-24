@@ -11,6 +11,8 @@ export const app = express();
 
 app.use(express.json());
 
+
+
 app.get("/", (_req: Request, res: Response) => {
     res.sendFile(path.join(__dirname, 'index.html'));
 });

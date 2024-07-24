@@ -5,7 +5,8 @@ const router = Router();
 
 
 router.get("/", async (_req: Request, res: Response, _next: NextFunction) => {
-    const users = allUsers();
+    const users = await allUsers();
+    console.log(users);
     return res.json({ users });
 });
 
@@ -20,12 +21,11 @@ router.post("/", async (req: Request, res: Response, next: NextFunction) => {
     }
 });
 
-
 router.get('/:id', async (req: Request, res: Response, next: NextFunction) => {
     try {
         const id = req.params.id;
 
-        const user = userById(id);
+        const user = await userById(id);
 
         return res.json(user);
     } catch (e) {
@@ -46,10 +46,10 @@ router.patch("/:id", (req: Request, res: Response, next: NextFunction) => {
     }
 });
 
-router.delete("/:id", (req: Request, res: Response, next: NextFunction) => {
+router.delete("/:id", async (req: Request, res: Response, next: NextFunction) => {
     try {
         const id = req.params.id;
-        const deleteOne = deleteUser(id)
+        const deleteOne = await deleteUser(id)
         return res.json(deleteOne);
     } catch (e) {
         next(e);

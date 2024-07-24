@@ -54,6 +54,7 @@ export interface Iuser {
   email: string;
   contact: string;
   status: string;
+  password: string;
 }
 
 export interface Ibooking {

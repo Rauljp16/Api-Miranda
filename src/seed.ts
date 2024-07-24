@@ -1,19 +1,21 @@
-import { connect } from "mongoose";
+import { createUser } from "./services/userServices";
 //import { createUsers } from "./services/userServices";
-//import { createRooms } from "./services/roomServices";
-//import { createContacts } from './services/contactServices';
-//import { createBookings } from "./services/bookingServices";
+// import { createRooms } from "./services/roomServices";
+// import { createContacts } from './services/contactServices';
+// import { createBookings } from "./services/bookingServices";
 import { faker } from "@faker-js/faker"
 import { Icontact, Iroom, Iuser, Ibooking } from "./types/global";
-
-
+import mongoose from "mongoose";
+import "dotenv/config";
 
 run().catch(err => console.log(err));
 
 export async function run() {
 
     try {
-        await connect('mongodb://localhost:27017/test');
+        await mongoose.connect(process.env.MONGO_URI as string);
+        const user = createRandomUser()
+        createUser(user)
         //createUsers(multipleUsers);
         //createRooms(multipleRooms);
         //createContacts(multipleContact)
@@ -21,7 +23,6 @@ export async function run() {
     } catch (error) {
         console.error('Error in run function:', error);
     }
-
 }
 
 
@@ -34,6 +35,7 @@ export function createRandomUser(): Iuser {
         email: faker.internet.email(),
         contact: faker.phone.number(),
         status: faker.helpers.arrayElement(['INACTIVE', 'ACTIVE']),
+        password: faker.internet.password(),
     };
 }
 
@@ -66,7 +68,6 @@ export function createRandomContact(): Icontact {
         phone: faker.phone.number(),
         asunto: faker.word.words(),
         comment: faker.lorem.paragraph(),
-
     };
 }
 

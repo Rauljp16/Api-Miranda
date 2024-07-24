@@ -10,6 +10,7 @@ const userSchema = new Schema<Iuser>({
     email: { type: String, required: true },
     contact: { type: String, required: true },
     status: { type: String, required: true },
+    password: { type: String, required: true },
 });
 
 const UserModel = model<Iuser>("User", userSchema)

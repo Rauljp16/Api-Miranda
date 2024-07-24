@@ -1,18 +1,23 @@
 import { Router, Request, Response, NextFunction } from "express";
 import { generateAccessToken } from "../services/loginServices";
 
-
 const router = Router()
 
-router.post("/", async (req: Request, res: Response, _next: NextFunction) => {
-    const { username, password } = req.body;
+router.post("/", async (req: Request, res: Response, next: NextFunction) => {
+    try {
+        const { username, password } = req.body;
 
-    if (username === process.env.USER && password === process.env.PASSWORD) {
-        const token = generateAccessToken(username);
+        const token = await generateAccessToken(username, password);
+
         return res.json({ token })
 
+    } catch (e) {
+
+        next(e);
+
+        return res.status(401).json({ message: "Invalid credentials" })
+
     }
-    return res.status(401).json({ message: "invalid credentials" })
-})
+});
 
 export default router;
