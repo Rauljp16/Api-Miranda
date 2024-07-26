@@ -1,8 +1,7 @@
 const jwt = require('jsonwebtoken');
 import dotenv from 'dotenv';
 import UserModel from '../models/userModel';
-import bcrypt from "bcrypt";
-
+var bcrypt = require('bcryptjs');
 
 dotenv.config();
 

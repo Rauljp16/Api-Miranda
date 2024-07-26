@@ -25,7 +25,7 @@ run().catch(err => console.log(err));
 function run() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
-            yield mongoose_1.default.connect(process.env.MONGO_URI);
+            yield mongoose_1.default.connect(process.env.MONGO_URL);
             const user = createRandomUser();
             (0, userServices_1.createUser)(user);
             //createUsers(multipleUsers);

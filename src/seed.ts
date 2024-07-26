@@ -13,7 +13,7 @@ run().catch(err => console.log(err));
 export async function run() {
 
     try {
-        await mongoose.connect(process.env.MONGO_URI as string);
+        await mongoose.connect(process.env.MONGO_URL as string);
         const user = createRandomUser()
         createUser(user)
         //createUsers(multipleUsers);

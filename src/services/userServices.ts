@@ -2,8 +2,7 @@ import { Iuser } from '../types/global';
 //import dataUsers from "../data/users.json"
 import UserModel from '../models/userModel';
 import mongoose from 'mongoose';
-import bcrypt from 'bcrypt';
-
+var bcrypt = require('bcryptjs');
 //const users: DataUsers[] = dataUsers
 
 export const allUsers = async (): Promise<Iuser[]> => {

@@ -16,14 +16,14 @@ exports.generateAccessToken = void 0;
 const jwt = require('jsonwebtoken');
 const dotenv_1 = __importDefault(require("dotenv"));
 const userModel_1 = __importDefault(require("../models/userModel"));
-const bcrypt_1 = __importDefault(require("bcrypt"));
+var bcrypt = require('bcryptjs');
 dotenv_1.default.config();
 const generateAccessToken = (username, password) => __awaiter(void 0, void 0, void 0, function* () {
     const user = yield userModel_1.default.findOne({ email: username });
     if (!user) {
         throw new Error('User not found');
     }
-    const match = yield bcrypt_1.default.compare(password, user.password);
+    const match = yield bcrypt.compare(password, user.password);
     if (match) {
         return jwt.sign(user.email, process.env.TOKEN_SECRET);
     }

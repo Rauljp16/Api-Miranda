@@ -16,7 +16,7 @@ exports.deleteUser = exports.updateUser = exports.createUsers = exports.createUs
 //import dataUsers from "../data/users.json"
 const userModel_1 = __importDefault(require("../models/userModel"));
 const mongoose_1 = __importDefault(require("mongoose"));
-const bcrypt_1 = __importDefault(require("bcrypt"));
+var bcrypt = require('bcryptjs');
 //const users: DataUsers[] = dataUsers
 const allUsers = () => __awaiter(void 0, void 0, void 0, function* () {
     const allUsers = yield userModel_1.default.find();
@@ -34,14 +34,14 @@ const userById = (id) => __awaiter(void 0, void 0, void 0, function* () {
 exports.userById = userById;
 const createUser = (user) => __awaiter(void 0, void 0, void 0, function* () {
     console.log(user.password);
-    const hasPassword = yield bcrypt_1.default.hash(user.password, 10);
+    const hasPassword = yield bcrypt.hash(user.password, 10);
     const newUser = new userModel_1.default(Object.assign(Object.assign({}, user), { password: hasPassword }));
     newUser.save();
 });
 exports.createUser = createUser;
 const createUsers = (users) => __awaiter(void 0, void 0, void 0, function* () {
     const hashedUsers = yield Promise.all(users.map((user) => __awaiter(void 0, void 0, void 0, function* () {
-        const hashedPassword = yield bcrypt_1.default.hash(user.password, 10);
+        const hashedPassword = yield bcrypt.hash(user.password, 10);
         return Object.assign(Object.assign({}, user), { password: hashedPassword });
     })));
     const createdUsers = yield userModel_1.default.insertMany(hashedUsers);

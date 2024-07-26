@@ -20,7 +20,7 @@ router.get("/", (_req, res, _next) => __awaiter(void 0, void 0, void 0, function
 router.post("/", (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const body = req.body;
-        const newUser = (0, userServices_1.createUser)(body);
+        const newUser = yield (0, userServices_1.createUser)(body);
         return res.json(newUser);
     }
     catch (e) {
@@ -39,18 +39,18 @@ router.get('/:id', (req, res, next) => __awaiter(void 0, void 0, void 0, functio
         return;
     }
 }));
-router.patch("/:id", (req, res, next) => {
+router.patch("/:id", (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const id = req.params.id;
         const body = req.body;
-        const update = (0, userServices_1.updateUser)(id, body);
+        const update = yield (0, userServices_1.updateUser)(id, body);
         return res.json(update);
     }
     catch (e) {
         next(e);
         return;
     }
-});
+}));
 router.delete("/:id", (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const id = req.params.id;
