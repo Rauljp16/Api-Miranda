@@ -5,8 +5,9 @@ import userControllers from "./controllers/userControllers";
 import contactControllers from "./controllers/contactControllers";
 import loginControllers from "./controllers/loginControllers";
 import authMiddleware from "./middleware/auth";
-// import path from "path"
+import path from "path"
 import mongoose from "mongoose";
+
 
 export const app = express();
 const mongoUri = process.env.MONGO_URL
@@ -23,11 +24,13 @@ const start = async () => {
 };
 
 start();
-
 app.get("/", (_req: Request, res: Response) => {
-    // res.sendFile(path.join(__dirname, 'index.html'));
-    res.send("kujsdfhkjgdfsjkjdf")
+    res.sendFile(path.join(__dirname, 'index.html'));
+    //res.send("kujsdfhkjgdfsjkjdf")
 });
+
+
+
 
 app.use("/login", loginControllers);
 app.use(authMiddleware);

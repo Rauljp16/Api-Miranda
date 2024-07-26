@@ -20,7 +20,7 @@ const userControllers_1 = __importDefault(require("./controllers/userControllers
 const contactControllers_1 = __importDefault(require("./controllers/contactControllers"));
 const loginControllers_1 = __importDefault(require("./controllers/loginControllers"));
 const auth_1 = __importDefault(require("./middleware/auth"));
-// import path from "path"
+const path_1 = __importDefault(require("path"));
 const mongoose_1 = __importDefault(require("mongoose"));
 exports.app = (0, express_1.default)();
 const mongoUri = process.env.MONGO_URL;
@@ -35,8 +35,8 @@ const start = () => __awaiter(void 0, void 0, void 0, function* () {
 });
 start();
 exports.app.get("/", (_req, res) => {
-    // res.sendFile(path.join(__dirname, 'index.html'));
-    res.send("kujsdfhkjgdfsjkjdf");
+    res.sendFile(path_1.default.join(__dirname, 'index.html'));
+    //res.send("kujsdfhkjgdfsjkjdf")
 });
 exports.app.use("/login", loginControllers_1.default);
 exports.app.use(auth_1.default);
