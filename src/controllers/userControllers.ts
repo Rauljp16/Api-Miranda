@@ -13,7 +13,7 @@ router.get("/", async (_req: Request, res: Response, _next: NextFunction) => {
 router.post("/", async (req: Request, res: Response, next: NextFunction) => {
     try {
         const body = req.body;
-        const newUser = createUser(body);
+        const newUser = await createUser(body);
         return res.json(newUser);
     } catch (e) {
         next(e);
@@ -34,11 +34,11 @@ router.get('/:id', async (req: Request, res: Response, next: NextFunction) => {
     }
 });
 
-router.patch("/:id", (req: Request, res: Response, next: NextFunction) => {
+router.patch("/:id", async (req: Request, res: Response, next: NextFunction) => {
     try {
         const id = req.params.id;
         const body = req.body;
-        const update = updateUser(id, body)
+        const update = await updateUser(id, body)
         return res.json(update);
     } catch (e) {
         next(e);

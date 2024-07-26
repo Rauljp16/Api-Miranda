@@ -4,12 +4,12 @@ import { allContact, contactById, createContact, updateContact, deleteContact } 
 const router = Router();
 
 
-router.get("/", (_req: Request, res: Response, _next: NextFunction) => {
-    const contact = allContact();
+router.get("/", async (_req: Request, res: Response, _next: NextFunction) => {
+    const contact = await allContact();
     return res.json({ contact });
 });
 
-router.post("/", (req: Request, res: Response, next: NextFunction) => {
+router.post("/", async (req: Request, res: Response, next: NextFunction) => {
     try {
         const body = req.body;
         const newContact = createContact(body);
@@ -21,11 +21,11 @@ router.post("/", (req: Request, res: Response, next: NextFunction) => {
 });
 
 
-router.get('/:id', (req: Request, res: Response, next: NextFunction) => {
+router.get('/:id', async (req: Request, res: Response, next: NextFunction) => {
     try {
         const id = req.params.id;
 
-        const contact = contactById(id);
+        const contact = await contactById(id);
 
         return res.json(contact);
     } catch (e) {
@@ -34,11 +34,11 @@ router.get('/:id', (req: Request, res: Response, next: NextFunction) => {
     }
 });
 
-router.patch("/:id", (req: Request, res: Response, next: NextFunction) => {
+router.patch("/:id", async (req: Request, res: Response, next: NextFunction) => {
     try {
         const id = req.params.id;
         const body = req.body;
-        const update = updateContact(id, body)
+        const update = await updateContact(id, body)
         return res.json(update);
     } catch (e) {
         next(e);
@@ -46,10 +46,10 @@ router.patch("/:id", (req: Request, res: Response, next: NextFunction) => {
     }
 });
 
-router.delete("/:id", (req: Request, res: Response, next: NextFunction) => {
+router.delete("/:id", async (req: Request, res: Response, next: NextFunction) => {
     try {
         const id = req.params.id;
-        const deleteOne = deleteContact(id)
+        const deleteOne = await deleteContact(id)
         return res.json(deleteOne);
     } catch (e) {
         next(e);
