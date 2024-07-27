@@ -1,4 +1,4 @@
-// import { createUsers } from "./services/userServices";
+//import { createUsers } from "./services/userServices";
 // import { createRooms } from "./services/roomServices";
 // import { createContacts } from "./services/contactServices";
 // import { createBookings } from "./services/bookingServices";
@@ -12,7 +12,7 @@ run().catch((err) => console.log(err));
 export async function run() {
     try {
         await mongoose.connect(process.env.MONGO_URL as string);
-        // createUsers(createRandomUsers(2));
+        //createUsers(createRandomUsers(1));
         // createRooms(createRandomRoom(2));
         // createContacts(createRandomContact(2));
         // createBookings(createRandomBooking(2));

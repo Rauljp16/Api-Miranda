@@ -18,7 +18,6 @@ export const userById = async (id: string): Promise<Iuser | undefined> => {
 };
 
 export const createUser = async (user: Iuser) => {
-    console.log(user.password);
     const hasPassword = await bcrypt.hash(user.password, 10)
     const newUser = new UserModel({ ...user, password: hasPassword })
     newUser.save()
@@ -26,6 +25,7 @@ export const createUser = async (user: Iuser) => {
 }
 
 export const createUsers = async (users: Iuser[]): Promise<Iuser[]> => {
+    console.log(users[0].password);
     const hashedUsers = await Promise.all(users.map(async user => {
         const hashedPassword = await bcrypt.hash(user.password, 10);
         return { ...user, password: hashedPassword };
