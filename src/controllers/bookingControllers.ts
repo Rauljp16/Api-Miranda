@@ -1,55 +1,69 @@
 import { Router, Request, Response, NextFunction } from "express";
-import { allBookings, bookingById } from "../services/bookingServices";
+import {
+    allBookings,
+    bookingById,
+    createBooking,
+    updateBooking,
+    deleteBooking,
+} from "../services/bookingServices";
 
 const router = Router();
 
-router.get("/", (_req: Request, res: Response, _next: NextFunction) => {
-    const bookings = allBookings();
+router.get("/", async (_req: Request, res: Response, _next: NextFunction) => {
+    const bookings = await allBookings();
     return res.json({ bookings });
 });
 
-router.post("/", (_req: Request, _res: Response, _next: NextFunction) => {
-    //     const input = req.body;
-    //create booking
-    //    return res.json({booking{}});
-});
-
-router.get("/:id", (req: Request, res: Response, next: NextFunction) => {
+router.post("/", async (req: Request, res: Response, next: NextFunction) => {
     try {
-        const id = req.params.id;
-        const booking = bookingById(id);
-
-        return res.json(booking);
+        const body = req.body;
+        const newBooking = createBooking(body);
+        return res.json({ newBooking });
     } catch (e) {
         next(e);
         return;
     }
 });
 
-router.patch("/:id", (_req: Request, _res: Response, _next: NextFunction) => {
-    // try {
-    //     const id = req.params.id;
-    //     const booking = bookingById(id);
+router.get("/:id", async (req: Request, res: Response, next: NextFunction) => {
+    try {
+        const id = req.params.id;
+        const booking = await bookingById(id);
 
-    // update booking here
-    //     return res.json(booking);
-    // } catch (e) {
-    //     next(e);
-    //     return;
-    // }
+        return res.json({ booking });
+    } catch (e) {
+        next(e);
+        return;
+    }
 });
 
-router.delete("/:id", (_req: Request, _res: Response, _next: NextFunction) => {
-    //     try {
-    //         const id = req.params.id;
-    //         const booking = bookingById(id);
+router.patch(
+    "/:id",
+    async (req: Request, res: Response, next: NextFunction) => {
+        try {
+            const id = req.params.id;
+            const body = req.body;
+            const update = await updateBooking(id, body);
+            return res.json({ update });
+        } catch (e) {
+            next(e);
+            return;
+        }
+    }
+);
 
-    // delete booking here
-    //         return res.json({success: true});
-    //     } catch (e) {
-    //         next(e);
-    //         return;
-    //     }
-});
+router.delete(
+    "/:id",
+    async (req: Request, res: Response, next: NextFunction) => {
+        try {
+            const id = req.params.id;
+            const deleteOne = await deleteBooking(id);
+            return res.json(deleteOne);
+        } catch (e) {
+            next(e);
+            return;
+        }
+    }
+);
 
 export default router;
