@@ -7,11 +7,11 @@ import loginControllers from "./controllers/loginControllers";
 import authMiddleware from "./middleware/auth";
 import path from "path"
 import mongoose from "mongoose";
-
+import cors from "cors";
 
 export const app = express();
 const mongoUri = process.env.MONGO_URL
-
+app.use(cors())
 app.use(express.json());
 
 const start = async () => {
