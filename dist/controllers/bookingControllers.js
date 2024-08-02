@@ -20,7 +20,7 @@ router.post("/", (req, res, next) => __awaiter(void 0, void 0, void 0, function*
     try {
         const body = req.body;
         const newBooking = (0, bookingServices_1.createBooking)(body);
-        return res.json(newBooking);
+        return res.json({ newBooking });
     }
     catch (e) {
         next(e);
@@ -31,7 +31,7 @@ router.get("/:id", (req, res, next) => __awaiter(void 0, void 0, void 0, functio
     try {
         const id = req.params.id;
         const booking = yield (0, bookingServices_1.bookingById)(id);
-        return res.json(booking);
+        return res.json({ booking });
     }
     catch (e) {
         next(e);
@@ -43,7 +43,7 @@ router.patch("/:id", (req, res, next) => __awaiter(void 0, void 0, void 0, funct
         const id = req.params.id;
         const body = req.body;
         const update = yield (0, bookingServices_1.updateBooking)(id, body);
-        return res.json(update);
+        return res.json({ update });
     }
     catch (e) {
         next(e);

@@ -20,18 +20,18 @@ router.post("/", (req, res, next) => __awaiter(void 0, void 0, void 0, function*
     try {
         const body = req.body;
         const newRoom = yield (0, roomServices_1.createRoom)(body);
-        return res.json(newRoom);
+        return res.json({ newRoom });
     }
     catch (e) {
         next(e);
         return;
     }
 }));
-router.get('/:id', (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+router.get("/:id", (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const id = req.params.id;
         const room = yield (0, roomServices_1.roomById)(id);
-        return res.json(room);
+        return res.json({ room });
     }
     catch (e) {
         next(e);
@@ -42,8 +42,8 @@ router.patch("/:id", (req, res, next) => __awaiter(void 0, void 0, void 0, funct
     try {
         const id = req.params.id;
         const body = req.body;
-        const update = yield (0, roomServices_1.updateRoom)(id, body);
-        return res.json(update);
+        const updated = yield (0, roomServices_1.updateRoom)(id, body);
+        return res.json({ updated });
     }
     catch (e) {
         next(e);

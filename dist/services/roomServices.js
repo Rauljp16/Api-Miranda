@@ -15,11 +15,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.deleteRoom = exports.updateRoom = exports.createRooms = exports.createRoom = exports.roomById = exports.allRooms = void 0;
 const roomModel_1 = __importDefault(require("../models/roomModel"));
 const mongoose_1 = __importDefault(require("mongoose"));
-//import dataRooms from "../data/rooms.json"
-//const rooms: DataRooms[] = dataRooms
 const allRooms = () => __awaiter(void 0, void 0, void 0, function* () {
     const allRooms = yield roomModel_1.default.find();
-    console.log(allRooms);
     return allRooms;
 });
 exports.allRooms = allRooms;
@@ -34,6 +31,7 @@ exports.roomById = roomById;
 const createRoom = (room) => {
     const newRoom = new roomModel_1.default(room);
     newRoom.save();
+    return newRoom;
 };
 exports.createRoom = createRoom;
 const createRooms = (rooms) => __awaiter(void 0, void 0, void 0, function* () {
@@ -43,8 +41,7 @@ const createRooms = (rooms) => __awaiter(void 0, void 0, void 0, function* () {
 exports.createRooms = createRooms;
 const updateRoom = (id, body) => __awaiter(void 0, void 0, void 0, function* () {
     const objectId = new mongoose_1.default.Types.ObjectId(id);
-    yield roomModel_1.default.updateOne({ _id: objectId }, body);
-    const updatedRoom = yield roomModel_1.default.findById(objectId);
+    const updatedRoom = yield roomModel_1.default.findOneAndUpdate({ _id: objectId }, body, { new: true });
     return updatedRoom;
 });
 exports.updateRoom = updateRoom;

@@ -15,11 +15,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.deleteBooking = exports.updateBooking = exports.createBookings = exports.createBooking = exports.bookingById = exports.allBookings = void 0;
 const bookingModel_1 = __importDefault(require("../models/bookingModel"));
 const mongoose_1 = __importDefault(require("mongoose"));
-//import dataBookings from "../data/bookings.json"
-//const bookings: DataBookings[] = dataBookings
 const allBookings = () => __awaiter(void 0, void 0, void 0, function* () {
     const allBookings = yield bookingModel_1.default.find();
-    console.log(allBookings);
     return allBookings;
 });
 exports.allBookings = allBookings;
@@ -34,6 +31,7 @@ exports.bookingById = bookingById;
 const createBooking = (booking) => {
     const newBooking = new bookingModel_1.default(booking);
     newBooking.save();
+    return newBooking;
 };
 exports.createBooking = createBooking;
 const createBookings = (bookings) => __awaiter(void 0, void 0, void 0, function* () {
@@ -43,8 +41,7 @@ const createBookings = (bookings) => __awaiter(void 0, void 0, void 0, function*
 exports.createBookings = createBookings;
 const updateBooking = (id, body) => __awaiter(void 0, void 0, void 0, function* () {
     const objectId = new mongoose_1.default.Types.ObjectId(id);
-    yield bookingModel_1.default.updateOne({ _id: objectId }, body);
-    const updatedBooking = yield bookingModel_1.default.findById(objectId);
+    const updatedBooking = yield bookingModel_1.default.findOneAndUpdate({ _id: objectId }, body, { new: true });
     return updatedBooking;
 });
 exports.updateBooking = updateBooking;

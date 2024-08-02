@@ -13,14 +13,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.deleteUser = exports.updateUser = exports.createUsers = exports.createUser = exports.userById = exports.allUsers = void 0;
-//import dataUsers from "../data/users.json"
 const userModel_1 = __importDefault(require("../models/userModel"));
 const mongoose_1 = __importDefault(require("mongoose"));
 var bcrypt = require('bcryptjs');
-//const users: DataUsers[] = dataUsers
 const allUsers = () => __awaiter(void 0, void 0, void 0, function* () {
     const allUsers = yield userModel_1.default.find();
-    // console.log(allUsers);
     return allUsers;
 });
 exports.allUsers = allUsers;
@@ -33,13 +30,14 @@ const userById = (id) => __awaiter(void 0, void 0, void 0, function* () {
 });
 exports.userById = userById;
 const createUser = (user) => __awaiter(void 0, void 0, void 0, function* () {
-    console.log(user.password);
     const hasPassword = yield bcrypt.hash(user.password, 10);
     const newUser = new userModel_1.default(Object.assign(Object.assign({}, user), { password: hasPassword }));
     newUser.save();
+    return newUser;
 });
 exports.createUser = createUser;
 const createUsers = (users) => __awaiter(void 0, void 0, void 0, function* () {
+    console.log(users[0].password);
     const hashedUsers = yield Promise.all(users.map((user) => __awaiter(void 0, void 0, void 0, function* () {
         const hashedPassword = yield bcrypt.hash(user.password, 10);
         return Object.assign(Object.assign({}, user), { password: hashedPassword });
@@ -50,8 +48,7 @@ const createUsers = (users) => __awaiter(void 0, void 0, void 0, function* () {
 exports.createUsers = createUsers;
 const updateUser = (id, body) => __awaiter(void 0, void 0, void 0, function* () {
     const objectId = new mongoose_1.default.Types.ObjectId(id);
-    yield userModel_1.default.updateOne({ _id: objectId }, body);
-    const updatedUser = yield userModel_1.default.findById(objectId);
+    const updatedUser = yield userModel_1.default.findOneAndUpdate({ _id: objectId }, body, { new: true });
     return updatedUser;
 });
 exports.updateUser = updateUser;

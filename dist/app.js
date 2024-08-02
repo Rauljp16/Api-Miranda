@@ -22,8 +22,10 @@ const loginControllers_1 = __importDefault(require("./controllers/loginControlle
 const auth_1 = __importDefault(require("./middleware/auth"));
 const path_1 = __importDefault(require("path"));
 const mongoose_1 = __importDefault(require("mongoose"));
+const cors_1 = __importDefault(require("cors"));
 exports.app = (0, express_1.default)();
 const mongoUri = process.env.MONGO_URL;
+exports.app.use((0, cors_1.default)());
 exports.app.use(express_1.default.json());
 const start = () => __awaiter(void 0, void 0, void 0, function* () {
     try {

@@ -13,13 +13,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.deleteContact = exports.updateContact = exports.createContacts = exports.createContact = exports.contactById = exports.allContact = void 0;
-//import dataContact from "../data/contacts.json"
-//const contacts: DataContacts[] = dataContact
 const contactModel_1 = __importDefault(require("../models/contactModel"));
 const mongoose_1 = __importDefault(require("mongoose"));
 const allContact = () => __awaiter(void 0, void 0, void 0, function* () {
     const allContact = yield contactModel_1.default.find();
-    console.log(allContact);
     return allContact;
 });
 exports.allContact = allContact;
@@ -34,6 +31,7 @@ exports.contactById = contactById;
 const createContact = (contact) => {
     const newContact = new contactModel_1.default(contact);
     newContact.save();
+    return newContact;
 };
 exports.createContact = createContact;
 const createContacts = (contacts) => __awaiter(void 0, void 0, void 0, function* () {
@@ -43,8 +41,7 @@ const createContacts = (contacts) => __awaiter(void 0, void 0, void 0, function*
 exports.createContacts = createContacts;
 const updateContact = (id, body) => __awaiter(void 0, void 0, void 0, function* () {
     const objectId = new mongoose_1.default.Types.ObjectId(id);
-    yield contactModel_1.default.updateOne({ _id: objectId }, body);
-    const updatedContact = yield contactModel_1.default.findById(objectId);
+    const updatedContact = yield contactModel_1.default.findOneAndUpdate({ _id: objectId }, body, { new: true });
     return updatedContact;
 });
 exports.updateContact = updateContact;

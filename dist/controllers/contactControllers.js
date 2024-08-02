@@ -20,18 +20,18 @@ router.post("/", (req, res, next) => __awaiter(void 0, void 0, void 0, function*
     try {
         const body = req.body;
         const newContact = (0, contactServices_1.createContact)(body);
-        return res.json(newContact);
+        return res.json({ newContact });
     }
     catch (e) {
         next(e);
         return;
     }
 }));
-router.get('/:id', (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+router.get("/:id", (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const id = req.params.id;
         const contact = yield (0, contactServices_1.contactById)(id);
-        return res.json(contact);
+        return res.json({ contact });
     }
     catch (e) {
         next(e);
@@ -43,7 +43,7 @@ router.patch("/:id", (req, res, next) => __awaiter(void 0, void 0, void 0, funct
         const id = req.params.id;
         const body = req.body;
         const update = yield (0, contactServices_1.updateContact)(id, body);
-        return res.json(update);
+        return res.json({ update });
     }
     catch (e) {
         next(e);
