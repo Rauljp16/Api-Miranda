@@ -13,10 +13,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.createRandomBooking = exports.createRandomContact = exports.createRandomRoom = exports.createRandomUsers = exports.run = void 0;
-//import { createUsers } from "./services/userServices";
-// import { createRooms } from "./services/roomServices";
-// import { createContacts } from "./services/contactServices";
-// import { createBookings } from "./services/bookingServices";
+const userServices_1 = require("./services/userServices");
+//import { createRooms } from "./services/roomServices";
+//import { createContacts } from "./services/contactServices";
+//import { createBookings } from "./services/bookingServices";
 const faker_1 = require("@faker-js/faker");
 const mongoose_1 = __importDefault(require("mongoose"));
 require("dotenv/config");
@@ -25,10 +25,10 @@ function run() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
             yield mongoose_1.default.connect(process.env.MONGO_URL);
-            //createUsers(createRandomUsers(1));
-            // createRooms(createRandomRoom(2));
-            // createContacts(createRandomContact(2));
-            // createBookings(createRandomBooking(2));
+            (0, userServices_1.createUsers)(createRandomUsers(5));
+            //createRooms(createRandomRoom(9));
+            //createContacts(createRandomContact(5));
+            //createBookings(createRandomBooking(10));
         }
         catch (error) {
             console.error("Error in run function:", error);
@@ -37,11 +37,24 @@ function run() {
 }
 exports.run = run;
 function createRandomUsers(count) {
+    const generateDescription = (name) => {
+        const activities = [
+            "es un cliente habitual",
+            "ha estado con nosotros desde",
+            "le gusta visitar",
+            "siempre disfruta de nuestras instalaciones en",
+            "es conocido por su amabilidad en"
+        ];
+        const place = faker_1.faker.location.city();
+        const adjective = faker_1.faker.word.adjective();
+        return `${name} ${activities[Math.floor(Math.random() * activities.length)]} ${place}. Es ${adjective}.`;
+    };
+    const name = faker_1.faker.person.fullName();
     const userGenerator = () => ({
-        foto: faker_1.faker.image.avatar(),
-        name: faker_1.faker.person.fullName(),
-        startDate: faker_1.faker.date.month(),
-        description: faker_1.faker.lorem.lines(),
+        foto: faker_1.faker.image.avatarGitHub(),
+        name: name,
+        startDate: faker_1.faker.date.past().toISOString().split('T')[0],
+        description: generateDescription(name),
         email: faker_1.faker.internet.email(),
         contact: faker_1.faker.phone.number(),
         status: faker_1.faker.helpers.arrayElement(["INACTIVE", "ACTIVE"]),
@@ -53,7 +66,7 @@ function createRandomUsers(count) {
 exports.createRandomUsers = createRandomUsers;
 function createRandomRoom(count) {
     const userGenerator = () => ({
-        Foto: faker_1.faker.image.avatar(),
+        Foto: faker_1.faker.image.urlLoremFlickr({ category: 'hotel-rooms' }),
         number: faker_1.faker.string.binary(),
         BedType: faker_1.faker.word.words(),
         Amenities: faker_1.faker.helpers.arrayElements([
