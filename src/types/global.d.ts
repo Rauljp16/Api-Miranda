@@ -29,7 +29,7 @@ export interface DataRooms {
   number: string;
   id: string;
   BedType: string;
-  Amenities: string[];
+  Facilities: string[];
   Rate: number;
   OfferPrice: number;
   Status: string;
@@ -79,7 +79,7 @@ export interface Iroom {
   Foto: string;
   number: string;
   BedType: string;
-  Amenities: string[];
+  Facilities: string[];
   Rate: number;
   OfferPrice: number;
   Status: string;

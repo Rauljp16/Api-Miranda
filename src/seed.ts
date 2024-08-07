@@ -1,4 +1,4 @@
-import { createUsers } from "./services/userServices";
+//import { createUsers } from "./services/userServices";
 //import { createRooms } from "./services/roomServices";
 //import { createContacts } from "./services/contactServices";
 //import { createBookings } from "./services/bookingServices";
@@ -12,8 +12,8 @@ run().catch((err) => console.log(err));
 export async function run() {
     try {
         await mongoose.connect(process.env.MONGO_URL as string);
-        createUsers(createRandomUsers(5));
-        //createRooms(createRandomRoom(9));
+        //createUsers(createRandomUsers(5));
+        //createRooms(createRandomRoom(2));
         //createContacts(createRandomContact(5));
         //createBookings(createRandomBooking(10));
     } catch (error) {
@@ -57,7 +57,7 @@ export function createRandomRoom(count: number): Iroom[] {
         Foto: faker.image.urlLoremFlickr({ category: 'hotel-rooms' }),
         number: faker.string.binary(),
         BedType: faker.word.words(),
-        Amenities: faker.helpers.arrayElements([
+        Facilities: faker.helpers.arrayElements([
             "TV",
             "WiFi",
             "Baño privado",
