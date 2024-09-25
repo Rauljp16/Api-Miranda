@@ -24,7 +24,7 @@ jobs:
       - name: Install Serverless Framework
         run: npm install -g serverless
 
-        - name: Authenticate with Serverless
+      - name: Authenticate with Serverless
         run: serverless login --token ${{ secrets.SERVERLESS_ACCESS_TOKEN }}
 
       - name: Deploy to AWS Lambda
