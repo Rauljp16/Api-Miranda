@@ -13,7 +13,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.createRandomBooking = exports.createRandomContact = exports.createRandomRoom = exports.createRandomUsers = exports.run = void 0;
-const userServices_1 = require("./services/userServices");
+//import { createUsers } from "./services/userServices";
 //import { createRooms } from "./services/roomServices";
 //import { createContacts } from "./services/contactServices";
 //import { createBookings } from "./services/bookingServices";
@@ -25,8 +25,8 @@ function run() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
             yield mongoose_1.default.connect(process.env.MONGO_URL);
-            (0, userServices_1.createUsers)(createRandomUsers(5));
-            //createRooms(createRandomRoom(9));
+            //createUsers(createRandomUsers(5));
+            //createRooms(createRandomRoom(2));
             //createContacts(createRandomContact(5));
             //createBookings(createRandomBooking(10));
         }
@@ -69,7 +69,7 @@ function createRandomRoom(count) {
         Foto: faker_1.faker.image.urlLoremFlickr({ category: 'hotel-rooms' }),
         number: faker_1.faker.string.binary(),
         BedType: faker_1.faker.word.words(),
-        Amenities: faker_1.faker.helpers.arrayElements([
+        Facilities: faker_1.faker.helpers.arrayElements([
             "TV",
             "WiFi",
             "Baño privado",
