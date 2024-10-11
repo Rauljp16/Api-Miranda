@@ -11,7 +11,6 @@ const router = Router();
 
 router.get("/", async (_req: Request, res: Response, _next: NextFunction) => {
     const users = await allUsers();
-    console.log(users);
     return res.json({ users });
 });
 
