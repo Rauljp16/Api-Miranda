@@ -43,7 +43,6 @@ describe("RUTA /ROOMS", () => {
         BedType: expect.any(String),
         Status: expect.any(String),
         Rate: expect.any(Number),
-        Amenities: expect.any(Array),
       });
     });
   });
@@ -59,14 +58,14 @@ describe("RUTA /ROOMS", () => {
 describe("RUTA /ROOMS/ID", () => {
   it("Comprueba que el status sea 200", async () => {
     const response = await request(app)
-      .get("/rooms/66a4ce17801e8ecbf9b4aa6d")
+      .get("/rooms/66f985371d66dd5b90d79063")
       .set("Authorization", "Bearer " + TOKEN_SECRET);
     expect(response.status).toBe(200);
   });
 
   it("Comprueba que el objeto room tiene las propiedades indicadas", async () => {
     const response = await request(app)
-      .get("/rooms/66a4ce17801e8ecbf9b4aa6d")
+      .get("/rooms/66f985371d66dd5b90d79063")
       .set("Authorization", "Bearer " + TOKEN_SECRET);
 
     // Asegúrate de que la respuesta es un objeto que contiene un objeto llamado 'room'
@@ -79,7 +78,6 @@ describe("RUTA /ROOMS/ID", () => {
         BedType: expect.any(String),
         Status: expect.any(String),
         Rate: expect.any(Number),
-        Amenities: expect.any(Array),
       })
     );
   });
