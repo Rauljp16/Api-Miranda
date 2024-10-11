@@ -25,10 +25,19 @@ const generateAccessToken = (username, password) => __awaiter(void 0, void 0, vo
     }
     const match = yield bcrypt.compare(password, user.password);
     if (match) {
-        return jwt.sign(user.email, process.env.TOKEN_SECRET);
+        const token = jwt.sign({ email: user.email, name: user.name }, process.env.TOKEN_SECRET, { expiresIn: '1h' });
+        const userWithoutPassword = {
+            _id: user._id,
+            name: user.name,
+            email: user.email,
+        };
+        return {
+            token,
+            user: userWithoutPassword,
+        };
     }
     else {
-        throw new Error();
+        throw new Error('Invalid credentials');
     }
 });
 exports.generateAccessToken = generateAccessToken;
