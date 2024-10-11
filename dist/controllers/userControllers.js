@@ -14,7 +14,6 @@ const userServices_1 = require("../services/userServices");
 const router = (0, express_1.Router)();
 router.get("/", (_req, res, _next) => __awaiter(void 0, void 0, void 0, function* () {
     const users = yield (0, userServices_1.allUsers)();
-    console.log(users);
     return res.json({ users });
 }));
 router.post("/", (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {

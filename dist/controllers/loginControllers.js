@@ -15,6 +15,7 @@ const router = (0, express_1.Router)();
 router.post("/", (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { username, password } = req.body;
+        console.log("testAWS");
         const token = yield (0, loginServices_1.generateAccessToken)(username, password);
         return res.json({ token });
     }
