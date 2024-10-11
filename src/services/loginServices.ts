@@ -25,6 +25,7 @@ export const generateAccessToken = async (username: string, password: string) =>
             _id: user._id,
             name: user.name,
             email: user.email,
+            foto: user.foto,
         };
         return {
             token,
