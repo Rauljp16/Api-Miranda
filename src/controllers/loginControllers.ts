@@ -6,7 +6,7 @@ const router = Router()
 router.post("/", async (req: Request, res: Response, next: NextFunction) => {
     try {
         const { username, password } = req.body;
-        console.log("testAWS");
+
         const token = await generateAccessToken(username, password);
 
         return res.json({ token })
