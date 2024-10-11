@@ -23,4 +23,4 @@ functions:
       - http:
           path: /{proxy+}
           method: ANY
-          cors: true (editado)
+          cors: true
