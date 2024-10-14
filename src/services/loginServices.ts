@@ -18,7 +18,7 @@ export const generateAccessToken = async (username: string, password: string) =>
         const token = jwt.sign(
             { email: user.email, name: user.name },
             process.env.TOKEN_SECRET,
-            { expiresIn: '1h' }
+
         );
 
         const userWithoutPassword = {
