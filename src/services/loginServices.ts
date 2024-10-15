@@ -15,12 +15,7 @@ export const generateAccessToken = async (username: string, password: string) =>
     const match = await bcrypt.compare(password, user.password);
 
     if (match) {
-        const token = jwt.sign(
-            { email: user.email, name: user.name },
-            process.env.TOKEN_SECRET,
-
-        );
-
+        const token = jwt.sign(user.email, process.env.TOKEN_SECRET)
         const userWithoutPassword = {
             _id: user._id,
             name: user.name,
